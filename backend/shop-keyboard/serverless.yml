@@ -1,0 +1,44 @@
+service: shop-backend
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-webpack
+  - serverless-openapi-documentation
+
+package:
+  individually: true
+
+functions:
+  getProductsList:
+    handler: src/getProductsList/index.getProductsList
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  getProductsById:
+    handler: src/getProductById/index.getProductById
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
+
+custom:
+  documentation:
+    version: "1"
+    title: "shop-backend"
+    description: "lambda functions for a shop"
+    models:
+      - name: "getProductsList"
+        description: "get mock product list"
+        contentType: "application/json"
+      - name: "getProductById"
+        description: "get a product"
+        contentType: "application/json"

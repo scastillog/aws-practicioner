@@ -8,3 +8,4 @@ Repository for practice AWS.
 - [TASK - 2](./tasks/TASK_02.md)
 - [TASK - 3](./tasks/TASK_03.md)
 - [TASK - 4](./tasks/TASK_04.md)
+- [TASK - 5](./tasks/TASK_05.md)

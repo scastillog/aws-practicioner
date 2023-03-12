@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
-import { successResponse } from "../utils/successResponse";
-import { errorResponse } from "../utils/errorResponse";
+import { successResponse } from "utils/successResponse";
+import { errorResponse } from "utils/errorResponse";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 

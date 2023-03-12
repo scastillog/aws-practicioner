@@ -1,0 +1,90 @@
+service: shop-backend
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-webpack
+  - serverless-openapi-documentation
+  - serverless-iam-roles-per-function
+
+package:
+  individually: true
+
+functions:
+  getProductsList:
+    handler: src/product-service/getProductsList/index.getProductsList
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  getProductsById:
+    handler: src/product-service/getProductById/index.getProductById
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
+  createProduct:
+    handler: src/product-service/createProduct/index.createProduct
+    events:
+      - http:
+          path: /products
+          method: post
+          cors: true
+  importProductsFile:
+    handler: src/import-service/importProductsFile/index.importProductsFile
+    events:
+      - http:
+          path: /import
+          method: get
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                name: true
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action: "s3:Listcket"
+        Resource:
+          - "arn:aws:s3:::uploaded-csv-files"
+      - Effect: "Allow"
+        Action: "s3:*"
+        Resource:
+          - "arn:aws:s3:::uploaded-csv-files/*"
+  importFileParser:
+    handler: src/import-service/importFileParser/index.importFileParser
+    events:
+      - s3:
+          bucket: "uploaded-csv-files"
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action: "s3:Listcket"
+        Resource:
+          - "arn:aws:s3:::uploaded-csv-files"
+      - Effect: "Allow"
+        Action: "s3:*"
+        Resource:
+          - "arn:aws:s3:::uploaded-csv-files/*"
+
+custom:
+  documentation:
+    version: "1"
+    title: "shop-backend"
+    description: "lambda functions for a shop"
+    models:
+      - name: "getProductsList"
+        description: "get mock product list"
+        contentType: "application/json"
+      - name: "getProductById"
+        description: "get a product"
+        contentType: "application/json"

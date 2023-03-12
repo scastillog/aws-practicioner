@@ -1,0 +1,9 @@
+openapi: 3.0.0
+components:
+  schemas: {}
+  securitySchemes: {}
+info:
+  title: shop-backend
+  description: lambda functions for a shop
+  version: '1'
+paths: {}

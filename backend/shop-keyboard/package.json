@@ -1,0 +1,22 @@
+{
+  "name": "shop-keyboard",
+  "version": "1.0.0",
+  "description": "My Serverless project",
+  "scripts": {
+    "deploy": "sls deploy",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.4.3",
+    "jest": "^29.4.3",
+    "serverless": "^3.20.0",
+    "serverless-openapi-documentation": "^0.4.0",
+    "serverless-webpack": "^5.11.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

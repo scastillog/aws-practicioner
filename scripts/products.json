@@ -1,0 +1,58 @@
+[
+  {
+    "id": {
+      "S": "0"
+    },
+    "title": {
+      "S": "NuPhy Air 75"
+    },
+    "description": {
+      "S": "NuPhy Air75 is an innovative 75% ultra-slim wireless mechanical keyboard."
+    },
+    "price": {
+      "N": "100"
+    }
+  },
+  {
+    "id": {
+      "S": "1"
+    },
+    "title": {
+      "S": "MX Mechanical Mini"
+    },
+    "description": {
+      "S": "Wireless Illuminated Performance Keyboard"
+    },
+    "price": {
+      "N": "130"
+    }
+  },
+  {
+    "id": {
+      "S": "2"
+    },
+    "title": {
+      "S": "Keychron K3 Ultra-slim"
+    },
+    "description": {
+      "S": "Wireless Bluetooth Mechanical Keyboard version 2 has included keycaps for both Windows and macOS"
+    },
+    "price": {
+      "N": "84"
+    }
+  },
+  {
+    "id": {
+      "S": "3"
+    },
+    "title": {
+      "S": "Ducky One 2 Mini Pure White"
+    },
+    "description": {
+      "S": "RGB LED 60% Double Shot PBT Mechanical Keyboard"
+    },
+    "price": {
+      "N": "99"
+    }
+  }
+]

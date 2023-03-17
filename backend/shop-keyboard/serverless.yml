@@ -1,6 +1,8 @@
 service: shop-backend
 frameworkVersion: "3"
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs14.x
@@ -16,6 +18,26 @@ package:
   individually: true
 
 functions:
+  catalogBatchProcess:
+    handler: src/product-service/catalogBatchProcess/index.catalogBatchProcess
+    events:
+      - sqs:
+          arn: ${env:SQS_ARN}
+          batchSize: 5
+          maximumBatchingWindow: 60
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - sqs:ReceiveMessage
+        Resource: ${env:SQS_ARN}
+      - Effect: Allow
+        Action:
+          - sns:Publish
+        Resource: ${env:SNS_ARN}
+      - Effect: Allow
+        Action:
+          - "dynamodb:PutItem"
+        Resource: ${env:TABLE_ARN}
   getProductsList:
     handler: src/product-service/getProductsList/index.getProductsList
     events:
@@ -67,14 +89,18 @@ functions:
             - prefix: uploaded/
           existing: true
     iamRoleStatements:
-      - Effect: "Allow"
+      - Effect: Allow
         Action: "s3:Listcket"
         Resource:
           - "arn:aws:s3:::uploaded-csv-files"
-      - Effect: "Allow"
+      - Effect: Allow
         Action: "s3:*"
         Resource:
           - "arn:aws:s3:::uploaded-csv-files/*"
+      - Effect: Allow
+        Action: "sqs:SendMessage"
+        Resource:
+          - ${env:SQS_ARN}
 
 custom:
   documentation:

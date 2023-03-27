@@ -7,3 +7,11 @@ export const errorResponse = (message) => {
     body: message,
   };
 };
+
+export const error400Response = (message, statusCode = 400) => {
+  return {
+    statusCode,
+    headers: CORS_HEADERS,
+    body: message,
+  };
+};

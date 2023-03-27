@@ -1,5 +1,7 @@
+const Dotenv = require("dotenv-webpack");
+
 module.exports = {
-  presets: ["@babel/preset-env"],
   mode: "production",
   target: "node",
+  plugins: [new Dotenv()],
 };

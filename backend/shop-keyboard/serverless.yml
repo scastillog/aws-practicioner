@@ -64,6 +64,7 @@ functions:
     events:
       - http:
           path: /import
+          authorizer: basicAuthorizer
           method: get
           cors: true
           request:
@@ -101,6 +102,8 @@ functions:
         Action: "sqs:SendMessage"
         Resource:
           - ${env:SQS_ARN}
+  basicAuthorizer:
+    handler: src/authorization-service/basicAuthorizer/index.basicAuthorizer
 
 custom:
   documentation:

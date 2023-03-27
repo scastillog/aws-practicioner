@@ -8,9 +8,9 @@ export const errorResponse = (message) => {
   };
 };
 
-export const error400Response = (message) => {
+export const error400Response = (message, statusCode = 400) => {
   return {
-    statusCode: 400,
+    statusCode,
     headers: CORS_HEADERS,
     body: message,
   };
